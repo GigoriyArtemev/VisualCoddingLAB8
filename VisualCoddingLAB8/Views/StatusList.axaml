@@ -1,0 +1,114 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="VisualCoddingLAB8.Views.StatusList"
+			xmlns:local="using:VisualCoddingLAB8.Models"
+			MaxWidth="1280"
+			MaxHeight="720"
+			MinWidth="1280"
+			MinHeight="720">
+
+	<Grid ColumnDefinitions="*,*,*" RowDefinitions="1*, 1*, 13*, 1*">
+		<Menu HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Grid.ColumnSpan="3" Width="1280" Background="LightBlue" Height="45">
+			<MenuItem Header="File" Background="LightBlue">
+				<MenuItem Command="{Binding $parent[Window].DataContext.NewTable}" Header="New"/>
+				<MenuItem Click="ClickButton_Save" Header="Save"/>
+				<MenuItem Click="ClickButton_Load" Header="Load"/>
+				<MenuItem Click="ClickButton_Exit" Header="Exit"/>
+			</MenuItem>
+			<MenuItem Click="ClickButton_About" Header="About" Background="LightBlue"/>
+		</Menu>
+		<Border Grid.Column="0" Grid.Row="1" BorderBrush="Black" BorderThickness="1" Background="Gainsboro">
+			<TextBlock Text="To Do" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+		</Border>
+		<Border Grid.Column="0" Grid.Row="2" BorderBrush="Black" BorderThickness="1">
+			<ScrollViewer VerticalScrollBarVisibility="Visible">
+				<ItemsControl Items="{Binding $parent[Window].DataContext.ToDoStates}" Name="ToDo" Width="420" HorizontalAlignment="Left" VerticalAlignment="Top">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Expander Header="{Binding Name}">
+								<StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
+									<TextBlock>Header</TextBlock>
+									<TextBox Text="{Binding Name}"></TextBox>
+									<TextBlock>Task</TextBlock>
+									<TextBox Text="{Binding StateText}"></TextBox>
+									<Button Name="a" Command="{Binding GetImage}" CommandParameter="{Binding $parent[Window]}">Add Image</Button>
+									<Viewbox Stretch="Uniform" Width="100" Height="100">
+										<Image Name="{Binding Name}" Source="{Binding PathToFile, TargetNullValue=NoneImage}"/>
+									</Viewbox>
+									<Button CommandParameter="{Binding}" Command="{Binding $parent[Window].DataContext.DeleteToDoTask}">Delete Task</Button>
+								</StackPanel>
+							</Expander>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</ScrollViewer>
+		</Border>
+		<Border Grid.Column="0" Grid.Row="3" BorderBrush="Black" BorderThickness="1">
+			<Button FontSize="20" Click="ClickButton_AddToDo" Name="AddToDo" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="50" Width="430">Add</Button>
+		</Border>
+
+		<Border Grid.Column="1" BorderBrush="Black" Grid.Row="1" BorderThickness="1" Background="Gainsboro">
+			<TextBlock Text="Doing" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+		</Border>
+		<Border Grid.Column="1" BorderBrush="Black" Grid.Row="2" BorderThickness="1">
+			<ScrollViewer VerticalScrollBarVisibility="Visible">
+				<ItemsControl Items="{Binding $parent[Window].DataContext.InProgressStates}" Name="InProgress" Width="420" HorizontalAlignment="Left" VerticalAlignment="Top">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Expander Header="{Binding Name}">
+								<StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
+									<TextBlock>Header</TextBlock>
+									<TextBox Text="{Binding Name}"></TextBox>
+									<TextBlock>Task</TextBlock>
+									<TextBox Text="{Binding StateText}"></TextBox>
+									<Button Name="a" Command="{Binding GetImage}" CommandParameter="{Binding $parent[Window]}">Add Image</Button>
+									<Viewbox Stretch="Uniform" Width="100" Height="100">
+										<Image Name="{Binding Name}" Source="{Binding PathToFile, TargetNullValue=NoneImage}"/>
+									</Viewbox>
+									<Button CommandParameter="{Binding}" Command="{Binding $parent[Window].DataContext.DeleteInProgressTask}">Delete Task</Button>
+								</StackPanel>
+							</Expander>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</ScrollViewer>
+		</Border>
+		<Border Grid.Column="1" BorderBrush="Black" Grid.Row="3" BorderThickness="1">
+			<Button FontSize="20" Click="ClickButton_AddDoing" Name="AddDoing" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="50" Width="430">Add</Button>
+		</Border>
+
+		<Border Grid.Column="2" BorderBrush="Black" Grid.Row="1" BorderThickness="1" Background="Gainsboro">
+			<TextBlock Text="Done" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
+		</Border>
+		<Border Grid.Column="2" BorderBrush="Black" Grid.Row="2" BorderThickness="1">
+			<ScrollViewer VerticalScrollBarVisibility="Visible">
+				<ItemsControl Items="{Binding $parent[Window].DataContext.FinishedStates}" Name="Done" Width="420" HorizontalAlignment="Left" VerticalAlignment="Top">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<Expander Header="{Binding Name}">
+								<StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left">
+									<TextBlock>Header</TextBlock>
+									<TextBox Text="{Binding Name}"></TextBox>
+									<TextBlock>Task</TextBlock>
+									<TextBox Text="{Binding StateText}"></TextBox>
+									<Button Name="a" Command="{Binding GetImage}" CommandParameter="{Binding $parent[Window]}">Add Image</Button>
+									<Viewbox Stretch="Uniform" Width="100" Height="100">
+										<Image Name="{Binding Name}" Source="{Binding PathToFile, TargetNullValue=NoneImage}"/>
+									</Viewbox>
+									<Button CommandParameter="{Binding}" Command="{Binding $parent[Window].DataContext.DeleteCompletedTask}">Delete Task</Button>
+								</StackPanel>
+							</Expander>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</ScrollViewer>
+		</Border>
+		<Border Grid.Column="2" BorderBrush="Black" Grid.Row="3" BorderThickness="1">
+			<Button FontSize="20" Click="ClickButton_AddDone" Name="AddDone" Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="50" Width="430">Add</Button>
+		</Border>
+	</Grid>
+
+</UserControl>
